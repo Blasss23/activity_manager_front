@@ -1,0 +1,147 @@
+<div class="login-wrapper container h-100" fxLayout="row" fxLayoutAlign="center center">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12  ">
+            <h2 class="text-center zoomtable">Detail of the subject <mat-label style="color:#69f0ae;">{{id}}</mat-label>
+            </h2>
+            <mat-card class="h-sep bg-none mat-elevation-z0 zoomtable">
+                <div class="row autoheight">
+                    <div class="col-6  text-center mb-3">
+                        <h3 style="color:#69f0ae;">Code </h3>
+                        {{ dataSubject.code_subjects }}
+                    </div>
+                    <div class="col-6   text-center mb-3">
+                        <h3 style="color:#69f0ae;">Name </h3>
+                        {{ dataSubject.name_subjects }}
+                    </div>
+                    <div class="col-6  text-center mb-3">
+                        <h3 style="color:#69f0ae;">Section </h3>
+                        {{ dataSubject.section_subjects }}
+                    </div>
+                    <div class="col-6   text-center mb-3">
+                        <h3 style="color:#69f0ae;">Turn </h3>
+                        {{ dataSubject.turn }}
+                    </div>
+                    <div class="col-6   text-center mb-3">
+                        <h3 style="color:#69f0ae;">Status </h3>
+                        <mat-chip class="example-box" cdkDrag>
+                            <span [ngStyle]="{'color': dataSubject.bool_deleted ? 'red' : '#69f0ae'}">
+                                {{dataSubject.bool_deleted ? 'Close':'Open'}}
+                            </span>
+                        </mat-chip>
+                    </div>
+                    <div class="col-12 text-center mb-3" *ngIf=" dataSubject.description_subjects">
+                        <h3 style="color:#69f0ae;">Description </h3>
+
+                        <p style="    white-space: normal;
+                        word-break: break-word;">
+                            {{ dataSubject.description_subjects }}
+                        </p>
+                    </div>
+
+                    <div class="col-12">
+                        <table mat-table [dataSource]="dataSource2" class="w-100 bg-none">
+                            <ng-container matColumnDef="id_activity">
+                                <th style="padding-left:10px;" mat-header-cell *matHeaderCellDef>
+                                    ID
+                                </th>
+                                <td style="padding-left:10px;" mat-cell *matCellDef="let element">
+                                    {{element.id_activity}}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="name_activity">
+                                <th style="padding-left:10px;" mat-header-cell *matHeaderCellDef>
+                                    Name
+                                </th>
+                                <td style="padding-left:10px;" mat-cell *matCellDef="let element">
+                                    {{element.name_activity}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Date_create">
+                                <th style="padding-left:10px;" class='sizeTable' mat-header-cell *matHeaderCellDef>
+                                    Create </th>
+                                <td style="padding-left:10px;" class='sizeTable' mat-cell *matCellDef="let element">
+                                    {{element.Date_create | date:"dd/MM/yyyy"}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Date_delivery">
+                                <th style="padding-left:10px;" mat-header-cell *matHeaderCellDef>
+                                    Delivery
+                                </th>
+                                <td style="padding-left:10px;" mat-cell *matCellDef="let element">
+                                    <span [ngStyle]="{'color': compare_date(element) ? '#fb0000' : ''}"
+                                        [matTooltip]=" compare_date(element) ? ' Delayed activity' : '' ">
+                                        {{element.Date_delivery | date:"dd/MM/yyyy"}}
+                                    </span>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="description">
+                                <th style="padding-left:10px;" class='sizeTable' mat-header-cell *matHeaderCellDef>
+                                    Description </th>
+                                <td style="padding-left:10px; width: 20%;" class='sizeTable' mat-cell
+                                    *matCellDef="let element">
+                                    {{description_substr(element.description)}}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="boolsendstatus">
+                                <th class=' text-center' mat-header-cell *matHeaderCellDef>
+                                    Shipping status
+                                </th>
+                                <td class=' text-center' mat-cell *matCellDef="let element">
+                                    <mat-icon
+                                        *ngIf=" element.boolsendstatus == true && (compare_date2(element) == true || compare_date2(element) != true) "
+                                        style="cursor:pointer; color:#69f0ae; font-size: 20px;">
+                                        check_circle</mat-icon>
+                                    <mat-icon *ngIf=" element.boolsendstatus != true && compare_date2(element) == true "
+                                        style="cursor:pointer; color: #c71916; font-size: 20px;">
+                                        info
+                                    </mat-icon>
+                                    <mat-icon *ngIf=" element.boolsendstatus != true  && compare_date2(element) != true"
+                                        style="cursor:pointer; color: #69f0ae; font-size: 20px;">
+                                        more_time
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Status">
+                                <th class=' text-center sizeTable' mat-header-cell *matHeaderCellDef>
+                                    Status
+                                </th>
+                                <td class=' text-center sizeTable' mat-cell *matCellDef="let element">
+                                    <mat-icon *ngIf=" element.Status != true  "
+                                        style="cursor:pointer; color: #c71916; font-size: 20px;">
+                                        info
+                                    </mat-icon>
+                                    <mat-icon *ngIf=" element.Status == true   "
+                                        style="cursor:pointer; color: #69f0ae; font-size: 20px;">
+                                        check_circle
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="weighint">
+                                <th style="padding-left:10px;" class='sizeTable' mat-header-cell *matHeaderCellDef>
+                                    Weighint </th>
+                                <td style="padding-left:10px;" class='sizeTable' mat-cell *matCellDef="let element">
+                                    {{element.weighint}}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="act">
+                                <th style="padding-left:10px;" class="text-center " mat-header-cell *matHeaderCellDef>
+                                    View </th>
+                                <td style="padding-left:10px;" class="text-center " mat-cell *matCellDef="let element">
+                                    <mat-icon color="accent" style="cursor:pointer;font-size: 20px;"
+                                        [routerLink]="['/student/Activity/detail',element.id_activity]">visibility
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns2;"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"
+                                [ngStyle]="{'background-color': compare_date(row) && row.boolsendstatus != true ? '#a52a2a61' : ''}">
+                            </tr>
+                        </table>
+                        <mat-paginator color='accent' class=" bg-none" [pageSizeOptions]="[5]" showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

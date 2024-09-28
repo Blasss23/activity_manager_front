@@ -1,0 +1,35 @@
+@media (max-width: 450px) {
+    
+    .zoomcenter {
+        text-align: left !important;
+        padding: 0 !important;
+        word-break: break-word;
+    }
+    .zoomstatus {
+        font-size: small;
+    }
+    
+    .date {
+        display: block !important;
+    }
+}
+@media (max-width: 991px) {
+    .zoomtable {
+        zoom: 80%;
+        margin: auto;
+    }
+    .sizeTable {
+        display: none;
+    }
+}
+.zoomtable {
+   width: 100%;
+  }
+  .bottontable {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+}
+.sizeTablePri {
+    display: none;
+}

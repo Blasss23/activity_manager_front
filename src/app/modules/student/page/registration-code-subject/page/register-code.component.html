@@ -1,0 +1,36 @@
+<div class="login-wrapper container h-100" fxLayout="row" fxLayoutAlign="center center">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12 ">
+            <h2 class="text-center zoomtable">Register subject</h2>
+            <mat-card class="h-sep bg-none mat-elevation-z0 zoomtable">
+                <form class="w-lg-50 w-md-75 w-sm-100 w-100 m-auto" autocomplete="off" [formGroup]="FormCode">
+                    <mat-form-field class="example-full-width mb-1" color="accent" appearance="fill">
+                        <mat-label>Code of Subject</mat-label>
+                        <input matInput placeholder="Code Subject" type="text" formControlName="Code" maxlength="10"
+                            autocomplete="off">
+                        <mat-error
+                            *ngIf="f1.Code.hasError('required') && !f1.Code.hasError('minLength') && !f1.Code.hasError('maxlength')">
+                            Code required
+                        </mat-error>
+                        <mat-error
+                            *ngIf="f1.Code.hasError('minlength') && !f1.Code.hasError('required') && !f1.Code.hasError('maxlength')">
+                            Code must be at least 10 characters
+                        </mat-error>
+                        <mat-error
+                            *ngIf="f1.Code.hasError('maxlength') && !f1.Code.hasError('required') && !f1.Code.hasError('minlength')">
+                            Code must be a maximum of 10 characters
+                        </mat-error>
+                    </mat-form-field>
+                    <div style="text-align: -webkit-center;  overflow: hidden; border-radius: 5px;" class="mb-3">
+                    </div>
+                    <div class="text-center">
+                        <button mat-stroked-button (click)="register_subject()" [disabled]="!FormCode.valid"
+                            color="accent" class="w-100 m-auto">
+                            Register
+                        </button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

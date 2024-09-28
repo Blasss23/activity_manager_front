@@ -1,0 +1,210 @@
+<div class="login-wrapper container" fxLayout="row" fxLayoutAlign="center center">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12 h-conten-ss">
+            <h2 class="text-center">Singup</h2>
+            <mat-horizontal-stepper [linear]="true" #stepper class="h-sep bg-none">
+                <mat-step [stepControl]="FormSingup1" color="warn">
+                    <form [formGroup]="FormSingup1" class="w-lg-50 w-md-75 w-sm-100 w-100 m-auto" autocomplete="off">
+                        <ng-template matStepLabel>Personal information</ng-template>
+                        <mat-form-field class="example-full-width mb-1" color="warn" appearance="fill">
+                            <mat-label>Frist name</mat-label>
+                            <input matInput placeholder="frist name" type="text" formControlName="frist_name"
+                                autocomplete="off">
+                            <mat-error
+                                *ngIf="f1.frist_name.hasError('required') && !f1.frist_name.hasError('minlength') ">
+                                first name required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="f1.frist_name.hasError('minlength') && !f1.frist_name.hasError('required') ">
+                                must be at least 2 characters
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width mb-1" color="warn" appearance="fill">
+                            <mat-label>Second name</mat-label>
+                            <input matInput placeholder="second name" type="text" formControlName="second_name"
+                                autocomplete="off">
+                            <mat-error
+                                *ngIf="f1.second_name.hasError('required') && !f1.second_name.hasError('minlength') ">
+                                second name required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="f1.second_name.hasError('minlength') && !f1.second_name.hasError('required') ">
+                                must be at least 2 characters
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width mb-1" color="warn" appearance="fill">
+                            <mat-label>Frist surname</mat-label>
+                            <input matInput placeholder="frist surname" type="text" formControlName="frist_surname"
+                                autocomplete="off">
+                            <mat-error
+                                *ngIf="f1.frist_surname.hasError('required') && !f1.frist_surname.hasError('minlength') ">
+                                frist surname required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="f1.frist_surname.hasError('minlength') && !f1.frist_surname.hasError('required') ">
+                                must be at least 2 characters
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width mb-2" color="warn" appearance="fill">
+                            <mat-label>Second surname</mat-label>
+                            <input matInput placeholder="second surname" type="text" formControlName="second_surname"
+                                autocomplete="new-password">
+                            <mat-error
+                                *ngIf="f1.second_surname.hasError('required') && !f1.second_surname.hasError('minlength') ">
+                                second surname required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="f1.second_surname.hasError('minlength') && !f1.second_surname.hasError('required') ">
+                                must be at least 2 characters
+                            </mat-error>
+                        </mat-form-field>
+                        <div class="text-center">
+                            <button mat-stroked-button color="warn" [disabled]="!FormSingup1.valid" matStepperNext
+                                class="w-100 m-auto">
+                                Next
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="FormSingup2" color="warn">
+                    <form [formGroup]="FormSingup2" class="w-lg-50 w-md-75 w-sm-100 w-100 m-auto" autocomplete="off">
+                        <ng-template matStepLabel>Account</ng-template>
+                        <mat-form-field class="example-full-width mb-1" color="warn" appearance="fill">
+                            <mat-label>Username</mat-label>
+                            <input matInput placeholder="username" formControlName="username" autocomplete="off">
+                            <mat-error *ngIf="f2.username.hasError('required') && !f2.username.hasError('minlength') ">
+                                username required
+                            </mat-error>
+                            <mat-error *ngIf="f2.username.hasError('minlength') && !f2.username.hasError('required') ">
+                                must be at least 6 characters
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width mb-1" color="warn" appearance="fill"
+                            id="input-password-field">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide1 ? 'password' : 'text'" placeholder="Password"
+                                (focus)="show=true" (blur)="show=false" id="input-password" formControlName="password"
+                                autocomplete="new-password" (input)="onCheckPass()" (click)="onCheckPass()">
+                            <mat-error
+                                *ngIf="f2.password.hasError('required') && !f2.password.hasError('equals') && !f2.password.hasError('pattern')">
+                                Confirm password required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="f2.password.hasError('equals') && !f2.password.hasError('required') && !f2.password.hasError('pattern')">
+                                passwords must be the same
+                            </mat-error>
+                            <mat-error
+                                *ngIf="f2.password.hasError('pattern') && !f2.password.hasError('required') && !f2.password.hasError('equals')">
+                                accepted format (a-z, A-Z, 0-9, (.), @ , _ , - )
+                            </mat-error>
+                            <button mat-icon-button matSuffix (click)="hide1 = !hide1"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+                                <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <!-- <div *ngIf="show" class="anim-fade-in col-sm-12 ccng-error" [@inOutAnimation]
+                            style="margin-top: 2px;padding: 0px 11px; font-size: 75%;">
+                            <div *ngIf="!onCheckPass().Vrequired.valid" class="invalid labelERR anim-fade-in"
+                                style="margin-top: 0;" [@inOutAnimation]>
+                                {{onCheckPass().Vrequired.msg}}
+                            </div>
+                            <div *ngIf="!onCheckPass().Vminlenght.valid" class="invalid labelERR anim-fade-in"
+                                style="margin-top: 0;" [@inOutAnimation]>
+                                {{onCheckPass().Vminlenght.msg}}
+                            </div>
+                            <div *ngIf="!onCheckPass().Vmaxlenght.valid" class="invalid labelERR anim-fade-in"
+                                style="margin-top: 0;" [@inOutAnimation]>
+                                {{onCheckPass().Vmaxlenght.msg}}
+                            </div>
+                            <div *ngIf="!onCheckPass().Vminus.valid" class="invalid labelERR anim-fade-in"
+                                style="margin-top: 0;" [@inOutAnimation]>
+                                {{onCheckPass().Vminus.msg}}
+                            </div>
+                            <div *ngIf="!onCheckPass().Vmayus.valid" class="invalid labelERR anim-fade-in"
+                                style="margin-top: 0;" [@inOutAnimation]>
+                                {{onCheckPass().Vmayus.msg}}
+                            </div>
+                            <div *ngIf="!onCheckPass().Vnum.valid" class="invalid labelERR anim-fade-in"
+                                style="margin-top: 0;" [@inOutAnimation]>
+                                {{onCheckPass().Vnum.msg}}
+                            </div>
+                            <div *ngIf="!onCheckPass().Vspace.valid" class="invalid labelERR anim-fade-in"
+                                style="margin-top: 0;" [@inOutAnimation]>
+                                {{onCheckPass().Vspace.msg}}
+                            </div>
+                            <div *ngIf="!onCheckPass().Vespec.valid" class="invalid labelERR anim-fade-in"
+                                style="margin-top: 0;" [@inOutAnimation]>
+                                {{onCheckPass().Vespec.msg}}
+                            </div>
+                            <div *ngIf="onCheckPass().Vespec.valid &&  onCheckPass().Vnum.valid && onCheckPass().Vmayus.valid && onCheckPass().Vspace.valid && onCheckPass().Vminus.valid && onCheckPass().Vmaxlenght.valid && onCheckPass().Vminlenght.valid && !onCheckPass().Vformat.valid"
+                                class="invalid labelERR anim-fade-in ccng-error" style="margin-top: 0;"
+                                [@inOutAnimation]>
+                                {{onCheckPass().Vformat.msg}}
+                            </div>
+                        </div> -->
+                        <mat-form-field class="example-full-width mb-1" color="warn" appearance="fill">
+                            <mat-label>Confirm password</mat-label>
+                            <input matInput [type]="hide2 ? 'password' : 'text'" placeholder="Password"
+                                formControlName="confirpassword" autocomplete="new-password"
+                                placeholder="confirpassword">
+                            <mat-error
+                                *ngIf="f2.confirpassword.hasError('required') || !f2.confirpassword.hasError('equals') ">
+                                Confirm password required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="f2.confirpassword.hasError('equals') && !f2.confirpassword.hasError('required') ">
+                                passwords must be the same
+                            </mat-error>
+                            <button mat-icon-button matSuffix (click)="hide2 = !hide2"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                                <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width mb-2" color="warn" appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="email" formControlName="email" autocomplete="off">
+                            <mat-error *ngIf="f2.email.hasError('required') && !f2.email.hasError('pattern') ">
+                                email required
+                            </mat-error>
+                            <mat-error *ngIf="f2.email.hasError('pattern') && !f2.email.hasError('required') ">
+                                wrong email format
+                            </mat-error>
+                        </mat-form-field>
+                        <div style="text-align: -webkit-center;  overflow: hidden; border-radius: 5px;" class="mb-3"
+                            *ngIf="!CheckRegister">
+                            <re-captcha (resolved)="resolved($event)"
+                                siteKey="6Lc5Uc0UAAAAAIoD91xstS87KRtGgy-UBiEj8pMs"></re-captcha>
+                        </div>
+                        <div class="text-center row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-2">
+                                <button mat-stroked-button color="warn" class="w-100 m-auto"
+                                    matStepperPrevious>Back</button>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-2">
+                                <button *ngIf="!CheckRegister" mat-stroked-button color="warn" class="w-100 m-auto"
+                                    [disabled]="!FormSingup2.valid || CheckRegister || !tokencaptcha" matStepperNext
+                                    (click)="submit(stepper)">Submit
+                                </button>
+                                <button *ngIf="CheckRegister" [disabled]="true" mat-stroked-button color="warn"
+                                    matStepperNext class="w-100 m-auto">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step color="warn" *ngIf="CheckRegister">
+                    <div class="w-lg-50 w-md-75 w-sm-100 w-100 m-auto text-center">
+                        <span _ngcontent-wik-c138="" class="material-icons ng-tns-c138-1"
+                            style="  font-size: 180px;  color: #f44336; "> done </span>
+                        <h2>Successful registration, please go back to login</h2>
+                        <button mat-stroked-button color="warn" class="w-100 m-auto"
+                            [routerLink]="['/teacher/auth/login']">
+                            Login
+                        </button>
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+<div class="login-wrapper container h-100" fxLayout="row" fxLayoutAlign="center center">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12  ">
+            <h2 class="text-center zoomtable" *ngIf="!show_image">Detail of the activity <mat-label style="color:#69f0ae;"> Nº
+                    {{id}}</mat-label>
+            </h2>
+            <h2 class="text-center zoomtable" *ngIf="show_image">Send activity <mat-label style="color:#69f0ae;"> Nº {{id}}
+                </mat-label>
+            </h2>
+            <mat-card class="h-sep bg-none mat-elevation-z0 row zoomtable " [ngStyle]="{'max-height':height+'px'}"
+                style="overflow-y: overlay; display: flex;" *ngIf="!show_image">
+                <div class="col-6  text-center mb-3">
+                    <h3 style="color:#69f0ae;">Name </h3>
+                    {{ dataActivity.name_activity }}
+                </div>
+                <div class="col-6  text-center mb-3">
+                    <h3 style="color:#69f0ae;">Delivery </h3>
+                    {{ dataActivity.Date_delivery | date:"yyyy/MM/dd" }}
+                </div>
+                <div class="col-6  text-center mb-3">
+                    <h3 style="color:#69f0ae;">Date of assignment</h3>
+                    {{ dataActivity.Date_create | date:"yyyy/MM/dd"}}
+                </div>
+                <div class="col-6  text-center mb-3">
+                    <h3 style="color:#69f0ae;">Weighint / My weighint </h3>
+                    {{ dataActivity.weighint }}/{{ dataActivity.my_weighint }}
+                </div>
+                <div class="col-6  text-center mb-3">
+                    <h3 style="color:#69f0ae;">Status</h3>
+                    <mat-chip class="example-box" cdkDrag>
+                        <span [ngStyle]="{'color': !dataActivity.Status ? 'red' : '#69f0ae'}">
+                            {{!dataActivity.Status ? 'Close':'Open'}}
+                        </span>
+                    </mat-chip>
+                </div>
+                <div class="col-6  text-center mb-3">
+                    <h3 style="color:#69f0ae;">Code subject </h3>
+
+                  
+                    <a mat-stroked-button color="accent" *ngIf="!dataActivity.boolstatussubjects"
+                    [routerLink]="['/student/Subjects/detail/',dataActivity.fkCodeSubjectCodeSubjects]"> {{
+                    dataActivity.fkCodeSubjectCodeSubjects }}</a>
+                    <a mat-stroked-button color="accent" style="color: red;" matTooltip="Close subject" *ngIf=" dataActivity.boolstatussubjects"
+                        [routerLink]="['/student/Subjects/detail/',dataActivity.fkCodeSubjectCodeSubjects]"> {{
+                        dataActivity.fkCodeSubjectCodeSubjects }}</a>
+                </div> 
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6  text-center mb-3">
+                    <h3 style="color:#69f0ae;">Send</h3>
+                    <button mat-stroked-button color="accent" (click)="show_image = !show_image"
+                        [disabled]="!dataActivity.Status || dataActivity.boolstatussubjects"> Send activity</button>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center mb-3" *ngIf=" dataActivity.description">
+                    <h3 style="color:#69f0ae;">Description </h3>
+
+                    <p style="white-space: normal;
+                        word-break: break-word;">
+                        {{ dataActivity.description }}
+                    </p>
+                </div>
+                <div class="col-12">
+                    <h3>List of my activities sent </h3>
+                    <table mat-table [dataSource]="dataSource2" class="w-100 bg-none  ">
+                        <ng-container matColumnDef="url_server">
+                            <th style="padding-left:10px;" class="text-center " mat-header-cell *matHeaderCellDef>
+                                Link
+                            </th>
+                            <td style="padding-left:10px;" class="text-center " mat-cell *matCellDef="let element">
+                                <a mat-stroked-button color="accent" [href]="sanitize(element.url_server)" >Link</a>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="description">
+                            <th style="padding-left:10px;" mat-header-cell *matHeaderCellDef>
+                                Description
+                            </th>
+                            <td style="padding-left:10px;" mat-cell *matCellDef="let element">
+                                {{element.description}}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="weighint">
+                            <th style="padding-left:10px;" mat-header-cell *matHeaderCellDef>
+                                Weighint
+                            </th>
+                            <td style="padding-left:10px;" mat-cell *matCellDef="let element">
+                                {{element.weighint}}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="status_verific">
+                            <th style="padding-left:10px;" class="text-center sizeTable" mat-header-cell
+                                *matHeaderCellDef>
+                                Verification status
+                            </th>
+                            <td style="padding-left:10px;" class="text-center  sizeTable" mat-cell
+                                *matCellDef="let element">
+
+                                <mat-icon *ngIf="element.status_verific != true  "
+                                    style="cursor:pointer; color: #69f0ae; font-size: 20px;" matTooltip="On hold">
+                                    hourglass_top
+                                </mat-icon>
+                                <mat-icon *ngIf=" element.status_verific == true   "
+                                    style="cursor:pointer; color: #69f0ae; font-size: 20px;" matTooltip="Verified">
+                                    verified
+                                </mat-icon>
+
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="act">
+                            <th style="padding-left:10px;" class="text-center " mat-header-cell *matHeaderCellDef>
+                                Action </th>
+                            <td style="padding-left:10px;" class="text-center " mat-cell *matCellDef="let element">
+                                <mat-icon color="accent" style="cursor:pointer;font-size: 20px;"
+                                    (click)="openDialog(element.id_activity_send)">delete
+                                </mat-icon>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns2;"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"
+                            [ngStyle]="{'background-color': compare_date(row) ? '#a52a2a61' : ''}"></tr>
+                    </table>
+
+                    <mat-paginator color='accent' class=" bg-none" [pageSizeOptions]="[5]" showFirstLastButtons>
+                    </mat-paginator>
+                </div>
+            </mat-card>
+            <mat-card class="h-sep bg-none mat-elevation-z0 zoomtable" *ngIf="show_image">
+                <div class="row autoheight" style="overflow-x: hidden;">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center mx-auto">
+                        <form action="" class="row" [formGroup]="fileUpdate" autocomplete="off">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3 ">
+                                <div class="col-12">
+                                    <mat-icon style="width: fit-content; height: fit-content; font-size: 6rem;">
+                                        file_upload
+                                    </mat-icon>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 my-2">
+                                        <button type="button" (click)="filePreview.click()" color="accent"
+                                            mat-stroked-button class="ccng-Btn-outln-scss align-text-center ">
+                                            Attach document
+                                        </button>
+                                        <div>
+                                            <input type="file" #filePreview onclick="this.value = null"
+                                                (change)="uploadFile($event.target)"
+                                                style="position: absolute; left: -1%; top: -15%; height: 0% !important; padding: 0; width: 102%; opacity: 0 ;cursor: pointer; z-index: -1;">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12 my-2">
+                                        <button type="button" (click)="removeUploadedFile()" *ngIf="removeUpload"
+                                            mat-stroked-button class="ccng-Btn-outln-scss align-text-center  "
+                                            color="accent" style="color: red;">
+                                            Delete document
+                                        </button>
+                                    </div>
+
+                                    <mat-error *ngIf="f1.file.hasError('required')" class="text-center p-1">
+                                        required file
+                                    </mat-error>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center mb-3">
+                                <img *ngIf="imageUrlFont" class="responsive-img mx-auto d-block" id="filePreview"
+                                    style="width: 100%;" src="{{imageUrlFont}}">
+                                <mat-icon *ngIf="!imageUrlFont"
+                                    style="width: fit-content; height: fit-content; font-size: 6rem;">
+                                    description
+                                </mat-icon>
+                                <label *ngIf="(!imageUrlFont || imageUrlFont)  ">{{ name_doc }}</label>
+                            </div>
+                            <mat-form-field class="example-full-width mb-1 col-12" color="accent" appearance="fill">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput formControlName="description" placeholder="description"
+                                    autocomplete="off"></textarea>
+                                <mat-error
+                                    *ngIf="f1.description.hasError('required')  && !f1.description.hasError('minlength')">
+                                    Description required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="!f1.description.hasError('required')  && f1.description.hasError('minlength')">
+                                    description must be at least 10 characters
+                                </mat-error>
+                            </mat-form-field>
+                        </form>
+                    </div>
+
+                    <div class="col-12 mt-2" style="text-align: right; ">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3 text-center">
+                                <button type="button" (click)="back()" color="accent" mat-stroked-button
+                                    class="ccng-Btn-outln-scss align-text-center" style="width: 200px; color: red;">
+                                    Go back
+                                </button>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3 text-center">
+                                <button type="button" [disabled]="!fileUpdate.valid" (click)="Send_activity(); "
+                                    color="accent" mat-stroked-button class="ccng-Btn-outln-scss align-text-center"
+                                    style="width: 200px;">
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

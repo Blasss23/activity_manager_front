@@ -1,0 +1,67 @@
+<div class="login-wrapper container h-100" fxLayout="row" fxLayoutAlign="center center">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12  ">
+            <h2 class="text-center zoomtable">Subjects</h2>
+            <mat-card class="h-sep bg-none mat-elevation-z0 zoomtable"> 
+                <table mat-table [dataSource]="dataSource2" class="w-100 bg-none">
+                    <ng-container matColumnDef="code_subjects">
+                        <th style="padding-left:10px;" class='sizeTable' mat-header-cell
+                            *matHeaderCellDef> Code Subject </th>
+                        <td style="padding-left:10px;" class='sizeTable' mat-cell *matCellDef="let element">
+                            <button mat-button color="accent">{{element.code_subjects}}</button>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="name_subjects">
+                        <th style="padding-left:10px;" mat-header-cell *matHeaderCellDef> Name subject </th>
+                        <td style="padding-left:10px;" mat-cell *matCellDef="let element">
+                            <span>{{element.name_subjects}}</span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="username">
+                        <th style="padding-left:10px; " class='sizeTable' mat-header-cell
+                            *matHeaderCellDef> Teacher </th>
+                        <td style="padding-left:10px;" class='sizeTable' mat-cell *matCellDef="let element">
+                            <span>{{element.username}}</span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="bool_deleted">
+                        <th style="padding-left:10px; " class='sizeTable' mat-header-cell
+                            *matHeaderCellDef> Status </th>
+                        <td style="padding-left:10px;" class='sizeTable' mat-cell *matCellDef="let element">
+                            <mat-chip class="example-box" cdkDrag>
+                                <span [ngStyle]="{'color': element.bool_deleted ? 'red' : '#69f0ae'}">
+                                    {{element.bool_deleted ? 'Close':'Open'}}
+                                </span>
+                            </mat-chip>
+                        </td>
+                    </ng-container> 
+                    <ng-container matColumnDef="turn">
+                        <th style="padding-left:10px;" mat-header-cell *matHeaderCellDef> Turn </th>
+                        <td style="padding-left:10px;" mat-cell *matCellDef="let element">
+                            <span>{{element.turn}}</span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="section_subjects">
+                        <th style="padding-left:10px; " class='sizeTable' mat-header-cell
+                            *matHeaderCellDef> Sections </th>
+                        <td style="padding-left:10px;" class='sizeTable' mat-cell *matCellDef="let element">
+                            <span>{{element.section_subjects}}</span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="act">
+                        <th style="padding-left:10px;" class="text-center" mat-header-cell
+                            *matHeaderCellDef> View </th>
+                        <td style="padding-left:10px;" class="text-center" mat-cell *matCellDef="let element">
+                            <mat-icon color="accent" style="cursor:pointer;" [routerLink]="['/student/Subjects/detail',element.code_subjects]">visibility</mat-icon>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns2;"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"
+                        [ngStyle]="{'background-color': compare_date(row) ? '#a52a2a61' : ''}"></tr>
+                </table>
+
+                <mat-paginator color='accent' class=" bg-none" [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+            </mat-card>
+        </div>
+    </div>
+</div>

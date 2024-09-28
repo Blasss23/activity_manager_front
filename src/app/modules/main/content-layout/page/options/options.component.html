@@ -1,0 +1,15 @@
+<div class="login-wrapper container" fxLayout="row" fxLayoutAlign="center center">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12 zoomtable">
+            <form class="w-sm-75 w-md-50 w-lg-50 w-lgx-25 w-75 m-auto" autocomplete="off">
+                <mat-card-content>
+                    <h2 class="text-center"> Select user type</h2>
+                    <a mat-stroked-button color="accent" class="btn-block m-2" [routerLink]="['/student/auth/login']">Student</a>
+                    <a mat-stroked-button color="warn" class="btn-block m-2" [routerLink]="['/teacher/auth/login']">Teacher</a>
+                </mat-card-content>
+
+            </form>
+        </div>
+
+    </div>
+</div>

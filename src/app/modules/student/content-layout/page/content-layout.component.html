@@ -1,0 +1,89 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches"
+    [ngStyle]="{'display':mobileQuery.matches ? 'grid' :'flex' }">
+    <mat-toolbar color="accent" class="example-toolbar navtop">
+        <mat-toolbar-row>
+            <div *ngIf="mobileQuery.matches == true " [hidden]="jwt != null">
+                <button mat-icon-button (click)="snav1.toggle()">
+                    <mat-icon aria-hidden="false" aria-label="Example menu icon">menu</mat-icon>
+                </button>
+            </div>
+            <div>
+                <button mat-icon-button (click)="snav1.toggle()" [hidden]="jwt == null">
+                    <mat-icon aria-hidden="false" aria-label="Example menu icon">menu</mat-icon>
+                </button>
+            </div>
+            <span class="example-spacer"></span>
+            <div class="actions mt-0" *ngIf="user">
+                <div class="row">
+                    <div class="col-12">
+                        <mat-chip-list aria-label="Fish selection">
+                            <mat-chip color="accent" selected>
+                                <mat-icon>person</mat-icon>{{user.username}}
+                            </mat-chip>
+                        </mat-chip-list>
+                    </div>
+                </div>
+            </div>
+            <div class="actions mt-0" *ngIf="mobileQuery.matches != true && jwt == null">
+                <div class="row">
+                    <div class="col-6">
+                        <button mat-stroked-button color="primary" style="color: black; border-color: black;"
+                            [routerLink]="['/student/auth/login']">Login</button>
+                    </div>
+                    <div class="col-6">
+                        <button mat-flat-button [routerLink]="['/student/auth/singup']">Signup</button>
+                    </div>
+                </div>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+        [hasBackdrop]="true">
+        <mat-sidenav #snav1 [mode]=" 'over'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
+            style="width: 150px;">
+            <mat-nav-list *ngIf="jwt == null ">
+                <a mat-list-item (click)="snav1.toggle()" [routerLink]="['/main']">Main</a>
+                <a mat-list-item (click)="snav1.toggle()" [routerLink]="['/student/auth/login']">Login</a>
+                <a mat-list-item (click)="snav1.toggle()" [routerLink]="['/student/auth/singup']">Signup</a>
+                <a mat-list-item (click)="snav1.toggle()" [routerLink]="['/student/auth/recoverypassword']">Recovery
+                    password</a>
+            </mat-nav-list>
+            <mat-nav-list *ngIf="jwt != null ">
+                <a mat-list-item (click)="snav1.toggle()" [routerLink]="['/student/Dashboard']">Dashboard</a>
+                <a mat-list-item (click)="snav1.toggle()" [routerLink]="['/student/Register_subject']">
+                    Register subject
+                </a>
+                <a mat-list-item (click)="snav1.toggle()" [routerLink]="['/student/Activity']">Activities</a>
+                <a mat-list-item (click)="snav1.toggle()" [routerLink]="['/student/Subjects']">Subjects</a>
+                <a mat-list-item (click)="snav1.toggle()" (click)="logout()">Logout</a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content id="body-card" style="overflow: hidden;">
+            <div class="spinner-container position-absolute d-flex justify-content-center align-items-center anim-fade-in"
+                style="top:0;bottom:0;left:0; right:0 ;z-index:10;background-color: rgb(66 66 66 / 66%);"
+                *ngIf="loadingService.isLoading | async">
+                <mat-spinner color="accent"></mat-spinner>
+            </div>
+            <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+            <!-- Background & animion & navbar & title -->
+            <div class="container-fluid">
+                <!-- Background animtion-->
+                <div class="background">
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                    <div class="cube"></div>
+                </div>
+                <div style="position: absolute; position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

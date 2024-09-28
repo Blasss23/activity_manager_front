@@ -1,0 +1,154 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.bg-none {
+  background: none;
+}
+@media (max-width: 576px) {
+  .autoheight {
+    max-height: 525px;
+    overflow-y: overlay;
+  }
+
+  .h-conten-ss {
+    height: 100%;
+    overflow: overlay;
+  }
+  .text-login-question-1 {
+    text-align: center !important;
+  }
+  .text-login-question-2 {
+    text-align: center !important;
+  }
+}
+@media (min-width: 768px) {
+  .h-conten-ss {
+    height: initial;
+    overflow: overlay;
+  }
+}
+
+@media (min-width: 576px) {
+  .autoheight {
+    overflow-y: overlay;
+    max-height: 525px;
+  } 
+  .w-sm-25 {
+    width: 25% !important;
+  }
+  .w-sm-50 {
+    width: 50% !important;
+  }
+  .w-sm-75 {
+    width: 75% !important;
+  }
+  .w-sm-100 {
+    width: 100% !important;
+  }
+  .text-login-question-1 {
+    text-align: center !important;
+  }
+  .text-login-question-2 {
+    text-align: center !important;
+  }
+}
+@media (min-width: 768px) {
+  .autoheight {
+    overflow-y: overlay;
+    max-height: fit-content;
+  }
+  .w-md-25 {
+    width: 25% !important;
+  }
+  .w-md-50 {
+    width: 50% !important;
+  }
+  .w-md-75 {
+    width: 75% !important;
+  }
+  .w-md-100 {
+    width: 100% !important;
+  }
+  .text-login-question-1 {
+    text-align: center !important;
+  }
+  .text-login-question-2 {
+    text-align: center !important;
+  }
+}
+@media (min-width: 992px) {
+  .autoheight {
+    overflow-y: overlay;
+    max-height: fit-content;
+  }
+  .w-lg-25 {
+    width: 25% !important;
+  }
+  .w-lg-50 {
+    width: 50% !important;
+  }
+  .w-lg-75 {
+    width: 75% !important;
+  }
+  .w-lg-100 {
+    width: 100% !important;
+  }
+  .text-login-question-1 {
+    text-align: left !important;
+  }
+  .text-login-question-2 {
+    text-align: right !important;
+  }
+}
+@media (min-width: 1444px) {
+  .autoheight {
+    overflow-y: overlay;
+    height: 100%;
+  }
+  .w-lgx-25 {
+    width: 25% !important;
+  }
+  .w-lgx-50 {
+    width: 50% !important;
+  }
+  .w-lgx-75 {
+    width: 75% !important;
+  }
+  .w-lgx-100 {
+    width: 100% !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .h-sep .mat-horizontal-content-container.ng-tns-c134-2 {
+    min-height: 390px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .h-sep .mat-horizontal-content-container.ng-tns-c134-2 {
+    min-height: 453px !important;
+  }
+}
+.text-right {
+  text-align: right !important;
+}
+.mat-paginator-page-size-label,
+.mat-paginator-page-size-value {
+  display: none !important;
+}
+
+.description{
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow: hidden;
+  margin: auto;
+  display: inline-block;
+}
