@@ -5,18 +5,18 @@ import { ActivityRoutingModule } from './activity-routing.module';
 import { ListActivityComponent } from './list-activity/list-activity.component';
 import { DetailActivityComponent } from './detail-activity/detail-activity.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
+import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { CoreModule } from 'src/app/core/core.module';
-import { MatPaginatorModule} from '@angular/material/paginator'; 
-import { MatFormFieldModule } from '@angular/material/form-field'; 
-import {MatChipsModule} from '@angular/material/chips';  
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyPaginatorModule as MatPaginatorModule} from '@angular/material/legacy-paginator'; 
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field'; 
+import {MatLegacyChipsModule as MatChipsModule} from '@angular/material/legacy-chips';  
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
 import { ModalComponent } from './modal/modal.component';
 @NgModule({
   declarations: [

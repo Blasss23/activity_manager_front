@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import { AbstractControl, UntypedFormGroup, UntypedFormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core'; 
 import * as $ from "jquery"; 
 
@@ -146,7 +146,7 @@ export function matchesPass(control: AbstractControl) {
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | any, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(control: UntypedFormControl | any, form: FormGroupDirective | NgForm | null): boolean {
     const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
     const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
 
@@ -210,7 +210,7 @@ export function autocompleteValidator(validOptions:any) {
 }
 
 export function MustMatch(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
+  return (formGroup: UntypedFormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
 

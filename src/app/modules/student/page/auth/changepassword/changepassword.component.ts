@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthStudentService } from 'src/app/core/service/Student/Auth/AuthStudent.service';
@@ -19,14 +19,14 @@ export class ChangepasswordComponent implements OnInit, OnDestroy {
   public hide2 = true;
   tokencaptcha: string = '';
   CheckUpdate: boolean = false;
-  FormChangePassword: FormGroup;
+  FormChangePassword: UntypedFormGroup;
   FormChangePass = {
     newPassword: '',
     confiPassword: ''
   }
   token: string | null = null;
 
-  constructor(private fb: FormBuilder, public service: AuthStudentService, public toast: ToastrService, public router: Router, private route: ActivatedRoute) {
+  constructor(private fb: UntypedFormBuilder, public service: AuthStudentService, public toast: ToastrService, public router: Router, private route: ActivatedRoute) {
 
     this.token = this.route.snapshot.paramMap.get('token');
 

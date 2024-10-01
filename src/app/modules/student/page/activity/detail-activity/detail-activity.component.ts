@@ -1,15 +1,15 @@
 import { ChangeDetectorRef, Component, DoCheck, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivityService } from 'src/app/core/service/Activity/Activity.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
@@ -34,7 +34,7 @@ export class DetailActivityComponent implements OnInit, OnDestroy, DoCheck {
   imageUrlFont: any = '';
   editFile: boolean = true;
   removeUpload: boolean = false;
-  fileUpdate: FormGroup;
+  fileUpdate: UntypedFormGroup;
   show_image: boolean = false;
   public name_doc: string = '';
   public height: any = window.screen.height;
@@ -49,12 +49,12 @@ export class DetailActivityComponent implements OnInit, OnDestroy, DoCheck {
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.fileInput = new ElementRef('');
-    this.fileUpdate = new FormGroup({
-      fk_code_subject: new FormControl(null, Validators.required),
-      fk_id_activity: new FormControl(null, Validators.required),
-      description: new FormControl(null, [Validators.required, Validators.minLength(10)]),
-      file: new FormControl(null, Validators.required),
-      fileExt: new FormControl(null),
+    this.fileUpdate = new UntypedFormGroup({
+      fk_code_subject: new UntypedFormControl(null, Validators.required),
+      fk_id_activity: new UntypedFormControl(null, Validators.required),
+      description: new UntypedFormControl(null, [Validators.required, Validators.minLength(10)]),
+      file: new UntypedFormControl(null, Validators.required),
+      fileExt: new UntypedFormControl(null),
     })
   }
 

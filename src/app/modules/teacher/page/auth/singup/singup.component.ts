@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'; 
 import {  matchesPass} from 'src/app/core/validator/custom.validators';
@@ -42,12 +42,12 @@ export class SingupComponent implements OnInit, OnDestroy {
   public hide1 = true;
   public hide2 = true;
   show: boolean = false;
-  FormSingup1: FormGroup;
-  FormSingup2: FormGroup;
+  FormSingup1: UntypedFormGroup;
+  FormSingup2: UntypedFormGroup;
   CheckRegister: boolean = false;
   tokencaptcha: string = '';
   FormSingup: singup_model = new singup_model;
-  constructor(private fb: FormBuilder, public service: AuthTeacherService, public toast: ToastrService, public router: Router) {
+  constructor(private fb: UntypedFormBuilder, public service: AuthTeacherService, public toast: ToastrService, public router: Router) {
     this.FormSingup1 = this.fb.group(
       {
         frist_name: [

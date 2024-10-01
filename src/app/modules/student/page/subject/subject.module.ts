@@ -5,15 +5,15 @@ import { SubjectRoutingModule } from './subject-routing.module';
 import { ListSubjectsComponent } from './list-subjects/list-subjects.component';
 import { CoreModule } from 'src/app/core/core.module';
 import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
+import {MatLegacyTooltipModule as MatTooltipModule} from '@angular/material/legacy-tooltip';
 import {MatDividerModule} from '@angular/material/divider';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
+import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
+import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { DetailSubjectsComponent } from './detail-subjects/detail-subjects.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips';
 
 
 @NgModule({

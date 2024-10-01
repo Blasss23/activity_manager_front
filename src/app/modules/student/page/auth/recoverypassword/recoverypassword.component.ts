@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthStudentService } from 'src/app/core/service/Student/Auth/AuthStudent.service';
@@ -40,11 +40,11 @@ export class RecoverypasswordComponent implements OnInit, OnDestroy {
   public hide1 = true;
   public hide2 = true;
   show: boolean = false;
-  FormEmail: FormGroup;
+  FormEmail: UntypedFormGroup;
   tokencaptcha: string = '';
   CheckRegister: boolean = false;
   Email: string = '';
-  constructor(private fb: FormBuilder, public service: AuthStudentService, public toast: ToastrService, public router: Router) {
+  constructor(private fb: UntypedFormBuilder, public service: AuthStudentService, public toast: ToastrService, public router: Router) {
     this.FormEmail = this.fb.group(
       {
         Email: [
